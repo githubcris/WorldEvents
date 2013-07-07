@@ -3,7 +3,6 @@ package worldevents
 import groovy.swing.factory.ColumnFactory
 
 class LocationTypes {
-
 	
 	public static getlist(String lang){		
 		

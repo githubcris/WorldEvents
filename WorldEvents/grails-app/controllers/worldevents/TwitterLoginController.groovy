@@ -1,29 +1,24 @@
 package worldevents
-
-
-import org.codehaus.groovy.grails.web.json.JSONObject
-
-import org.springframework.orm.jdo.JdoObjectRetrievalFailureException;
-import org.springframework.web.servlet.LocaleResolver
-import org.springframework.web.servlet.i18n.SessionLocaleResolver
 import twitter4j.*
 import twitter4j.api.FriendsFollowersResources
 import twitter4j.auth.Authorization
 import twitter4j.internal.json.UserJSONImpl
-import org.grails.plugins.localization.*
-import grails.converters.JSON
 import javax.servlet.http.HttpServletRequest
+import org.springframework.context.i18n.LocaleContextHolder
+
 
 class TwitterLoginController {
 
 	def twitterService
 
-	def index = {}
-	
 	def newevent = {}
 	
 	def changelanguage = {}		
 	
+	def index = 
+	{
+		render view:'menu'
+	}
 	def login = {
 				
 		try
@@ -80,7 +75,7 @@ class TwitterLoginController {
 			render "Se ha producido un error, vuelva a intentarlo pasado unos segundos"
 		}
 		
-		redirect view: 'index'
+		redirect view: 'menu'
 	}
 
 	def callback = {
@@ -101,6 +96,8 @@ class TwitterLoginController {
 			Twitter twitter = twitterService.getTwitter()
 	
 			session.userFriends = TwitUtil.getFriends(twitter, myUser.twitter_id, myUser.friendsCount)
+			
+			Locale.setDefault(new Locale('es'))
 	        }
 		}
 		catch(Exception ex)
@@ -114,7 +111,7 @@ class TwitterLoginController {
 		}
 		else
 		{
-			redirect view: 'index'
+			redirect view: 'menu'
 		}
 	}
 
@@ -147,8 +144,8 @@ class TwitterLoginController {
 	
 	def changelanguage()
 	{
-		String targetUri = params.targetUri ? params.targetUri : "/"
-  
+		String targetUri = params.targetUri ? params.targetUri : "/?lang=es"
+		
         redirect(uri: targetUri)
 	}
 }

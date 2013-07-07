@@ -47,8 +47,8 @@ body {
 	        box-shadow: 0 0 0.3em #255b17;
 }
 
-#grailsLogo {
-	background-color: #abbf78;
+#worldLogo {
+	background-color:#B0D4E5;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -65,7 +65,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: #0e2e7d;
 }
 
 a:hover, a:active {
@@ -73,9 +73,9 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	color: #0e2e7d;
 	font-weight: normal;
-	font-size: 1.25em;
+	font-size: 0.8em;
 	margin: 0.8em 0 0.3em 0;
 }
 
@@ -108,7 +108,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #B0D4E5;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -154,7 +154,7 @@ img {
 	float: left;
 	list-style-type: none;
 	margin-right: 0.5em;
-	padding: 0;
+	padding: 0em;
 }
 
 .nav a {
@@ -178,18 +178,6 @@ img {
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
-.no-borderradius .nav a:focus, .no-borderradius .nav a:hover {
-	background-color: transparent;
-	color: #444444;
-	text-decoration: underline;
-}
-
-.nav a.home, .nav a.list, .nav a.create {
-	background-position: 0.7em center;
-	background-repeat: no-repeat;
-	text-indent: 25px;
-}
-
 .nav a.home {
 	background-image: url(../images/skin/house.png);
 }
@@ -201,7 +189,149 @@ img {
 .nav a.create {
 	background-image: url(../images/skin/database_add.png);
 }
+.nav a.home, .nav a.list, .nav a.create {
+	background-position: 0.7em center;
+	background-repeat: no-repeat;
+	text-indent: 25px;
+}
 
+.littlenav {
+	font-color: #1122D5;
+	background-color: #efefef;
+	padding: 0.5em 0.75em;
+	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
+	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
+	        box-shadow: 0 0 3px 1px #aaaaaa;
+	font-size: 14px;
+	padding: 0.1em 0.1em;
+	
+	zoom: 1;
+	 height:22px;
+	  width:80%;
+}
+
+.littlenav ul {
+	overflow: hidden;
+	padding-left: 0;
+	zoom: 1;
+}
+
+.littlenav li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin-right: 0.5em;
+	padding-right:3em;
+}
+
+.littlenav a {
+
+	display: block;
+	/**padding: 0.25em 0.7em;**/
+	text-decoration: none;
+	   -moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	        border-radius: 0.3em;
+}
+
+.littlenav a:active, .littlenav a:visited {
+	color: #1122D5;
+}
+
+.littlenav a:focus, .littlenav a:hover {
+	background-color: #999999;
+	color: #ffffff;
+	outline: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.toolnav {
+	color: #ffffff;
+	font-color: #1122D5;
+	font-size: 14px;
+	padding: 0.1em 0.1em;
+	 -moz-box-shadow: 0 0 0.05em 0.05em #aaaaaa;
+	-webkit-box-shadow: 0 0 0.05em  0.05em  #aaaaaa;
+	        box-shadow: 0 0 0.05em  0.05em  #aaaaaa;
+	zoom: 1;
+	 height:auto;
+	 width:80%;
+}
+
+.toolnav ul {
+	overflow: hidden;
+	padding-left: 0;
+	zoom: 1;
+}
+
+.toolnav li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin-right: 0.5em;
+	padding-right:3em;
+}
+
+.toolnav a {
+
+	display: block;
+	/**padding: 0.25em 0.7em;**/
+	text-decoration: none;
+
+}
+
+.toolnav a:active, .toolnav a:visited {
+	color: #1122D5;
+}
+
+.toolnav a:focus, .toolnav a:hover {
+	background-color: #999999;
+	color: #ffffff;
+	outline: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+.no-borderradius .toolnav a:focus, .no-borderradius .toolnav a:hover {
+	background-color: transparent;
+	color: #444444;
+	text-decoration: underline;
+}
+
+
+.blanknav {
+	font-color: #1122D5;
+	padding: 0.5em 0.75em;
+	font-size: 14px;
+	padding: 0.1em 0.1em;
+	
+	zoom: 1;
+	 height:auto;
+	 width:80%;
+}
+
+
+.blanknav ul {
+	overflow: hidden;
+	padding-left: 0;
+	zoom: 1;
+}
+
+.blanknav li {
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin-right: 0.5em;
+	padding-right:3em;
+}
+
+.blanknav a {
+
+	display: block;
+	/**padding: 0.25em 0.7em;**/
+	text-decoration: none;
+	   -moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	        border-radius: 0.3em;
+}
 /* CREATE/EDIT FORMS AND SHOW PAGES */
 
 fieldset,
@@ -243,12 +373,14 @@ label {
 	cursor: pointer;
 	display: inline-block;
 	margin: 0 0.25em 0 0;
+	font-style: italic;
+	color:#6092b3;
 }
 
 input, select, textarea {
 	background-color: #fcfcfc;
 	border: 1px solid #cccccc;
-	font-size: 1em;
+	font-size: 0.8em;
 	padding: 0.2em 0.4em;
 }
 
@@ -261,8 +393,7 @@ select[multiple] {
 }
 
 textarea {
-	width: 250px;
-	height: 150px;
+
 	overflow: auto; /* IE always renders vertical scrollbar without this */
 	vertical-align: top;
 }
@@ -283,14 +414,16 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: #0e2e7d;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
 	position: relative;
 	top: 0.1em;
 }
-
+textarea {
+    resize: none;
+}
 ul.one-to-many {
 	display: inline-block;
 	list-style-position: inside;
@@ -329,10 +462,12 @@ fieldset.embedded legend {
 .errors,
 .message {
 	font-size: 0.8em;
-	line-height: 2;
-	margin: 1em 2em;
-	padding: 0.25em;
+	line-height: 1;
+	margin: 0.5em 1em;
+	padding: 0.10em;
+	width:50%;
 }
+
 
 .message {
 	background: #f3f3ff;
@@ -381,7 +516,11 @@ fieldset.embedded legend {
 	-webkit-box-shadow: 0 0 0.5em #ffaaaa;
 	        box-shadow: 0 0 0.5em #ffaaaa;
 }
-
+.generalerror
+{
+	text-align: center;
+	color: 	#cc0000;
+}
 /* same effects for browsers that support HTML5 client-side validation (these have to be specified separately or IE will ignore the entire rule) */
 
 input:invalid, select:invalid, textarea:invalid {
@@ -402,24 +541,25 @@ table {
 	border-top: 1px solid #DFDFDF;
 	border-collapse: collapse;
 	width: 100%;
-	margin-bottom: 1em;
+	font-size: 0.8em;
+
 }
 
 tr {
 	border: 0;
+    margin-bottom:20px;
 }
 
-tr>td:first-child, tr>th:first-child {
+tr>td{
 	padding-left: 1.25em;
+	  margin-bottom:20px;
 }
 
-tr>td:last-child, tr>th:last-child {
-	padding-right: 1.25em;
-}
+
 
 td, th {
 	line-height: 1.5em;
-	padding: 0.5em 0.6em;
+	padding: 0.3em 0.3em;
 	text-align: left;
 	vertical-align: top;
 }
@@ -476,7 +616,7 @@ th.desc a {
 }
 
 th:hover, tr:hover {
-	background: #E1F2B6;
+	background: #f5f5f5;
 }
 
 /* PAGINATION */
@@ -522,14 +662,16 @@ th:hover, tr:hover {
 /* ACTION BUTTONS */
 
 .buttons {
-	background-color: #efefef;
+	background-color: #3d94d4;
+	color: #ffffff;
 	overflow: hidden;
-	padding: 0.3em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
+	padding: 0.2em;
+	/**   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
 	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
-	margin: 0.1em 0 0 0;
-	border: none;
+	        box-shadow: 0 0 3px 1px #aaaaaa;*/
+	margin: 1.0em 1 0 0;
+	border: 0.1em;
+	font-weight: bold;
 }
 
 .buttons input,
@@ -593,4 +735,44 @@ th:hover, tr:hover {
 a.skip {
 	position: absolute;
 	left: -9999px;
+}
+.headLabel
+{
+    font-size: 14px;
+    margin-top:20px;
+	margin-bottom:20px;
+	margin-left:50px;
+	margin-right:1px;
+}
+.textlarge
+{
+	width: 90%;
+}
+
+.errortext
+{
+	width: 90%;
+	border: 1px solid red;
+}
+.errortext100
+{
+	width: 82%;
+	border: 1px solid red;
+}
+.shorterrortext
+{
+	width: 30%;
+	border: 1px solid red;
+}
+.separator
+{
+	height:10px;
+}
+.separator3
+{
+	height:3px;
+}
+.itemlist
+{
+	width: 80%;
 }

@@ -6,6 +6,8 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'errors.css')}" type="text/css">
 	</head>
 	<body>
-		<g:renderException exception="${exception}" />
+	<div style="padding-top: 30px; text-align: center;">
+           <label class="generalerror" ><g:message code="label.tittle.error"/></label>
+    </div>      
 	</body>
 </html>

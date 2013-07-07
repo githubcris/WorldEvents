@@ -62,16 +62,23 @@ grails.hibernate.cache.queries = false
 
 grails.views.javascript.library="jquery"
 grails.plugin.reveng.packageName ="worldevents3"
-grails.plugin.reveng.includeTables = ['myevent','user']
-grails.plugin.reveng.manyToManyBelongsTos = ['user': 'myevent']
+//grails.config.locations = [ "file:${userHome}/.grails/${appName}-config.groovy" ]
+//grails.plugin.reveng.includeTables = ['event','participants']
+//grails.plugin.reveng.manyToManyTables = ['event', 'participants', 'location_type']
+//grails.plugin.reveng.manyToManyTables = ['participants']
+//grails.plugin.reveng.manyToManyBelongsTos = ['participants': 'user']
+
+//grails.plugin.reveng.manyToManyBelongsTos = ['event': 'user','location_type': 'event','event': 'participants','user': 'participants']
 environments {
     development {
         grails.logging.jul.usebridge = true
-		grails.serverURL = "http://cristinaache.no-ip.biz:8090/WorldEvents"
+		//grails.serverURL = "http://217.116.9.243/WorldEvents"
+		grails.serverURL = "http://cristinaache.no-ip.biz:8090/WorldEventsj"
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.serverURL = "http://cristinaache.no-ip.biz:8080/WorldEvents"
+       // grails.serverURL = "http://217.116.9.243/WorldEvents"
+		grails.serverURL = "http://worldevents.com.es"
 
     }
 }
@@ -79,22 +86,29 @@ environments {
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
 
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+    appenders {
+		rollingFile name:"myl_og",
+		file:"/tmp/logs/worldevents.log", maxFileSize:"10MB",		
+        layout:pattern(conversionPattern: '%c{2} %m%n')
+		
+    }
+	all  apiLog: ['codehaus.groovy.grails.web.servlet',
+	// controllers
+	'codehaus.groovy.grails.web.pages',
+	// GSP
+	'codehaus.groovy.grails.web.sitemesh',
+	// layouts
+	'codehaus.groovy.grails.web.mapping.filter', // URL mapping
+	'codehaus.groovy.grails.web.mapping', // URL Mapping
+	'codehaus.groovy.grails.commons',// core / classloading
+	'codehaus.groovy.grails.plugins'// plugins
+	]
+	
+	root {
+		info  'appLog', 'apiLog'
+	}
+	
 }
 
 //consumer keys for twitter

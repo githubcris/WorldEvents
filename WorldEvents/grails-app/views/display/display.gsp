@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <%@page import="worldevents.Event"%>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
-<style type="text/css" media="screen"></style>
+<%@page import="worldevents.ParticipantsUtil"%>
+<%@page import="org.springframework.context.i18n.LocaleContextHolder"%>
 <g:javascript library="jquery"/>
 <r:require module="jquery-ui"/>
+<meta name="layout" content="main"/>
 <r:layoutResources/>
+<g:javascript src="timedatepicker.js" />
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>  
 <script type="text/javascript">
@@ -35,182 +37,124 @@
         }
       });
     };
-  
-    </script>
-<g:javascript src="timedatepicker.js" />
-<script>
-$(function() {
-
-	$( "#timepicker" ).timepicker();
-	});	
-$(function() {
-
-	$( "#datepickerini" ).datepicker({
-        dateFormat:'dd/mm/yy',
-        changeYear:true,
-        changeMonth:true
-    });
-	$( "#datepickerlast" ).datepicker({
-        dateFormat:'dd/mm/yy',
-        changeYear:true,
-        changeMonth:true
-    });
-
-	});	
-
 </script>
-<link rel="stylesheet" href="${resource(dir:'css',file:'sky.css')}" /> 
 <link rel="stylesheet" href="${resource(dir:'css',file:'timedatepicker.css')}"/> 
-<div class="divCenterClass">
-   <g:form action = "searchResults" class="center" >
-   <g:if test="${session.user}">
-
-    <div class="head">
-       <table>
-       <tr>
-       <%
-		String targetUri = (request.forwardURI - request.contextPath)
-		%>
-       <td width="80%" colspan="2"/>
-       <td>
-        <g:link class="rightAlign" controller="twitterLogin" action="changelanguage"  params="[lang: 'en', targetUri: targetUri]"><g:message class="litleletter" code="label.language.english"/></g:link>
-       </td>
-       <td>
-         <g:link class="rightAlign" controller="twitterLogin" action="changelanguage" params="[lang: 'es', targetUri: targetUri]"><g:message class="litleletter"  code="label.language.spanish"/></g:link>
-       </td>
-       </tr>
-       <tr height="20px">
-       <td colspan="3"/>
-       </tr>
-       <tr>
-       <td width="70%" colspan="2">
-        <img class="headLabel" src="${session.user.profileImg}"/>  <strong>${session.user.name}</strong>
-        </td>
-        <td>
-         <g:link class="rightAlign" controller="twitterLogin" action="logout">Logout</g:link>
-        </td>
-       </tr>
-       <tr>
-
-       </tr>
-       </table>
-   </div>
+<div>
+  <g:form action = "searchResults" class="center" >
+  <g:if test="${session.user}">
+  <div class="headLabel">
+        <img  src="${session.user.profileImg}"/>  <strong>${session.user.name}</strong>
+  </div>
   <g:if  test="${params.mode == 'detail'}" >  
-  
-  	   <div id="menu" class="title" >
-   	   <p>
-   	    <g:link  class="headLabel" action="newevent"><g:message code="label.title.new"/></g:link>
-        <label style="pad-left:10px;color:black;">  |  </label>
-     	<g:link class="headLabel" controller="display"><g:message code="label.title.events"/></g:link>
-   	   </p>
-   	   </div>
-   	     <p class="separator"></p>
-   	     <g:if test="${session?.user?.twitter_id == event?.user?.twitter_id }">
-   	     <div  class="label">
-   	     <table class="tablemenu">
-   	     <tr>
-   	     <td>   	    
-            <g:link action="modevent"  controller="edit"  class="label" id="${event.id}">
-            <g:message code="default.edit.label"/>
-            </g:link>         	
-   	     </td>
-   	     <td>
-   	      <g:link action="sendtwit"  controller="edit"  class="label" id="${event.id}">
-            <g:message code="default.sendtwit.label"/>
-            </g:link>
-   	     </td>
-   	     <td>  	     
-            <g:link action="delevent"  controller="edit"  class="label" id="${event.id}">
-            <g:message code="default.delete.label"/>
-            </g:link>
-   	     </td>
-   	     <tr>
-   	     </table>
-   	     </div>
-   	     </g:if>
-       <div class="itemlist" > 	    
-      <table>
-       <td width="20px" style= "vertical-align: top;">
-	 	<p>
-	  		<img class="headLabel" src="${event?.user?.profileImg}" width="40px" height="40px"/> 
-	 	</p>
-	 	</td>
-	   <td>
-	     <p class = "leftAlign" style="list-style: none outside none;">
-       		<label for="eventlabel" class="label"><g:message code="label.field.event"/>:</label>
-          	<link  class="label" id="${event.name}">${event.name?.encodeAsHTML()}<link>          
+    <table>	 
+     <tr>
+	 <td  style= "vertical-align: top; width:40px;">	 
+	 </td>
+	 <td>
+	 <div class="separator"></div>
+     <div class="littlenav" role="navigation">
+			<ul>
+				<li> <img  src="${event?.user?.profileImg}" width="21px" height="21px" /> 
+				 ${event?.user.name?.encodeAsHTML()}</li>
+		   </ul>
+	</div>
+	<div class="separator"></div>
+		<%String targetUris = (request.forwardURI - request.contextPath) %>
+	<div class="toolnav" role="navigation">
+	      <ul>				
+				<li> <a> <g:link action="assist"  params="[id:event?.id, targetReturn:targetUris, params:params]">
+            		<g:message code="default.igo.label"/>  </g:link></a>
+         	    </li>
+         	    <li><a>
+         	      <g:link action="sendtwitdetail"  controller="display"  class="label" id="${event.id}" params="[id:event?.id, targetReturn:targetUris, params:params]">
+            		<g:message code="default.sendtwit.label"/>
+            	  </g:link>
+         	    </a></li>
+         	    <g:if test="${session?.user?.twitter_id == event?.user?.twitter_id }">
+         	    <li><a>
+         	    	<g:link action="modevent"  controller="edit"  class="label" id="${event.id}">
+            		<g:message code="default.edit.label"/>
+            	</g:link>    
+         	    </a></li>
+         	    <li><a>
+         	   		 <g:link action="delevent"  controller="edit"  class="label" id="${event.id}">
+           			 <g:message code="default.delete.label"/>
+           			 </g:link>
+         	    </a></li>   
+         	    </g:if>
+		 </ul>
+	</div>
+	<div class="separator3"></div>	
+	<div class="blanknav" role="navigation">
+	 <ul>
+	   <li>
+			<g:link action="showdetail"  controller="display"   id="${event.id}">${event.name?.encodeAsHTML()}</g:link>
+	   </li>
+	 </ul>
+	</div>			
+	<div class="separator3"></div>	
+	<div class="itemlist" > 	         
+       <p>
+            <label class="label" ><g:message code="label.field.description"/>:</label>
+          	${event.description?.encodeAsHTML()}
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">
-       		 <label  for="eventlabel" class="label"><g:message code="label.field.user"/>:</label>
-          	 <link class="label" id="${event?.user.screenName}">${event?.user.screenName?.encodeAsHTML()}</link>
+       <div class="separator3"></div>
+       <p>   
+           <label  class="label" ><g:message code="label.field.startdate"/>:</label>
+              <%java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");%>
+			  <%String sStartDate = dateFormat.format(new Date().parse("yyyy-MM-dd", event.startDate?.toString()))%>
+           ${sStartDate}
+           <label class="label" ><g:message code="label.field.time"/>:</label>
+          ${event.startTime?.toString().substring(0,5).encodeAsHTML()}        
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">
-            <label for="eventlabel" class="label" ><g:message code="label.field.description"/>:</label>
-          	<label class="label" id="${event.description}">${event.description?.encodeAsHTML()}</label>
+       <div class="separator3"></div>
+       <p>   
+           <label><g:message code="label.field.enddate"/>:</label>
+           <% String sEndDate;  if(event.endDate != null) {sEndDate = dateFormat.format(new Date().parse("yyyy-MM-dd", event.endDate?.toString()))}%>
+           ${sEndDate}
+           <label class="label" ><g:message code="label.field.time"/>:</label>
+           ${event.endTime?.toString()?.substring(0,5)?.encodeAsHTML()} 
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">   
-            <label  for="eventlabel" class="label" ><g:message code="label.field.startdate"/>:</label>
-            <label  for="eventlabel" class="label" id="${event.sStartDate}">${event.sStartDate?.encodeAsHTML()}</label>
-            <label  for="eventlabel" class="label" ><g:message code="label.field.time"/>:</label>
-            <label class="label" id="${event.startTime}">${event.startTime?.toString().substring(0,5).encodeAsHTML()}</label>
-      </p>
-       <p class = "leftAlign" style="list-style: none outside none;">   
-     	    <label  for="eventnamelable" class="label" ><g:message code="label.field.enddate"/>:</label>
-            <label  for="eventnamelable" class="label" id="${event.sEndDate}">${event.sEndDate?.encodeAsHTML()}</label>
-            <label  for="eventnamelable" class="label" ><g:message code="label.field.time"/>:</label>
-            <label class="label" id="${event.endTime}">${event.endTime?.toString()?.substring(0,5)?.encodeAsHTML()}</label>
+       <div class="separator3"></div>
+       <p>
+            <label  for="eventlabel" class="label"><g:message code="label.field.place"/>:</label>
+            ${event.loc?.name.encodeAsHTML()} ${event.address?.encodeAsHTML()}
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">
-            <label  for="eventnamelable" class="label"><g:message code="label.field.place"/>:</label>
-            <label class="label"  id="${event.loc}">${event.loc?.name.encodeAsHTML()}</label>
-           	<label class="label"  id="${event.address}">${event.address?.encodeAsHTML()}</label>
+       <div class="separator3"></div>
+        <p>
+            <label class="label"><g:message code="label.field.city"/>:</label>
+           	${event.city?.encodeAsHTML()}
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">
-            <label  for="eventnamelable" class="label"><g:message code="label.field.city"/>:</label>
-           	<label class="label"  id="${event.city}">${event.city?.encodeAsHTML()}</label>
+       <div class="separator3"></div>
+       <p>
+        <label class="label"><g:message code="default.participants.label"/></label>:  ${ParticipantsUtil.getParticipantsNumber(event.id)?.encodeAsHTML()}  
        </p>
+       <div class="separator3"></div>
        <p class = "centerAlign" style="list-style: none outside none;"></p>
        	     <div class="leftAlign" id="map" style="width: 400px; height: 300px" >
        	      <script type="text/javascript">
              	  loadMap("${event.loc.name+' '+event.address+' '+ event.city}","map");
            	  </script>
       		 </div>      
-	 </td>
-      </table>
      </div>
+    </td>
+    </tr>
+    </table>          
   </g:if>
   <g:else>
-  <div id="menu" class="title" >
-   <p class="title" >
-     <label class="headLabel"><g:message code="label.title.events"/></label> 
-     <label style="pad-left:10px;color:black;">  |  </label>
-     <g:link class="headLabel" action="newevent"><g:message code="label.title.new"/></g:link> 
-   </p>
-   </div>
-   <div id="filter">
-  	<table>
-   		<tr>
-   		    <td width="2%"></td> 
-   			<td  class="filtertext" >
-   				<g:message code="label.filter.from"/>:
-   				 <g:textField class="text"  id="datepickerini" name="dateIni" value="${dateIni}" />
-   				<g:message code="label.filter.to"/>: 
-   				 <g:textField class="text"   id="datepickerlast"  name="dateLast" value="${dateLast}" />
-   				<g:actionSubmitImage  class="btnimg" name= "search" action="searchResults" value ="Buscar" src="${resource(dir: 'images', file: 'search.png')}" />
-   		   </td>
-   		    <td width="2%"></td>
-   			<td>
-     		</td>  			
-  		 </tr>
-  		 <tr>
-  		 <td width="2%"></td>
-  		 <td>
+  <div class="headLabel">
+  <p>
+  	<g:message   width="22px" code="label.filter.from"/>:
+    <g:textField width="22px"  id="datepickerini${LocaleContextHolder.getLocale()?.toString()?.substring(0,2)}" name="dateIni" value="${dateIni}" />
+   	<g:message width="22px" code="label.filter.to"/>: 
+   	<g:textField width="22px"   id="datepickerlast${LocaleContextHolder.getLocale()?.toString().substring(0,2)}"  name="dateLast" value="${dateLast}" />
+   	<g:actionSubmit class="buttons" name= "search" action="searchResults"  value ="${g.message(code: 'label.filter.search')}"  />
+  </p>
+	<div class="separator"></div>
+  <p style="vertical-align:center; height:42px;">
   		 <g:message code="label.filter.followers"/>
-  		 <g:checkBox name="followers"  value="${params.followers}"/>
-  		 <td>
-  		 <td width="2%"></td>
-  		 <tr>  		 
-  	</table>
+  		 <g:checkBox name="followers" value="${followers}"/>
+  </p> 		 
   </div>  
   <script>
   </script>
@@ -219,70 +163,117 @@ $(function() {
          	 alert('${g.message(code: 'label.error.eventdelete')}')
           </script>
        </g:if>
-  <p class="separator"></p>
-	 <g:each in="${results}" var="event" style="list-style: none outside none;">
-	 <table>
+    	 <g:each in="${results}" var="event" style="list-style: none outside none;">	   
+	 <table>	 
 	 <tr>
-	 <td width="20px" style= "vertical-align: top;">
-	 <p>
-	  <img class="headLabel" src="${event?.user?.profileImg}" width="40px" height="40px"/> 
-	 </p>
+	 <td  style= "vertical-align: top; width:40px;">	 
 	 </td>
 	 <td>
+	 <div class="separator"></div>
+	  <div class="littlenav" role="navigation">
+			<ul>
+				<li> <img  src="${event?.user?.profileImg}" width="21px" height="21px" /> 
+				 ${event?.user.name?.encodeAsHTML()}</li>
+		   </ul>
+	</div>
+	<div class="separator"></div>
+	<div class="toolnav" role="navigation">
+	      <ul>
+				<%String targetReturn = (request.forwardURI - request.contextPath) %>
+				<li> <a> <g:link action="assistlist"   id="${participants}"  params="[id: event?.id,targetReturn:targetReturn,max:params.max,dateIni:params.dateIni,dateLast:params.dateLast,offset:params.offset,followers:params.followers ]">
+            		<g:message code="default.igo.label"/>  </g:link></a>
+         	    </li>
+         	    <li><a>
+         	      <g:link action="sendtwitlist"  controller="display"  class="label" id="${event.id}" params="[id: event?.id,targetReturn:targetReturn,max:params.max,dateIni:params.dateIni,dateLast:params.dateLast,offset:params.offset,followers:params.followers ]">
+            		<g:message code="default.sendtwit.label"/>
+            	  </g:link>
+         	    </a></li>
+         	    <g:if test="${session?.user?.twitter_id == event?.user?.twitter_id }">
+         	    <li><a>
+         	    	<g:link action="modevent"  controller="edit"  class="label" id="${event.id}">
+            		<g:message code="default.edit.label"/>
+            	</g:link>    
+         	    </a></li>
+         	    <li><a>
+         	   		 <g:link action="delevent"  controller="edit"  class="label" id="${event.id}">
+           			 <g:message code="default.delete.label"/>
+           			 </g:link>
+         	    </a></li>   
+         	    </g:if>
+		 </ul>
+	</div>
+	<div class="separator"></div>	
+	<div class="blanknav" role="navigation">
+	  <ul>
+		<li>
+		<g:link action="showdetail"  controller="display"   id="${event.id}">${event.name?.encodeAsHTML()}</g:link>
+		</li>
+	 </ul>
+	</div>		
+	<div class="separator3"></div>
+	
 	 <div class="itemlist" > 	   
-       <p class = "leftAlign" style="list-style: none outside none;">
-       		<label  for="eventlabel" class="label"><g:message code="label.field.event"/>:</label>
-          	<g:link action="showdetail"  controller="display"  class="label" id="${event.id}">${event.name?.encodeAsHTML()}</g:link>
-       </p>
-       <p class = "leftAlign" style="list-style: none outside none;">
-       		 <label  for="eventlabel" class="label"><g:message code="label.field.user"/>:</label>
-          	 <link class="label" id="${event?.user.screenName}">${event?.user.screenName?.encodeAsHTML()}</link>
-       </p>
+      
        <p class = "leftAlign" style="list-style: none outside none;">
             <label  for="eventlabel" class="label" ><g:message code="label.field.description"/>:</label>
-          	<label class="label" id="${event.description}">${event.description?.encodeAsHTML()}</label>
+          	${event.description?.encodeAsHTML()}
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">   
-           <label  for="eventlabel" class="label" ><g:message code="label.field.startdate"/>:</label>
+       <div class="separator3"></div>
+       <p>   
+           <label class="label" ><g:message code="label.field.startdate"/>:</label>
               <%java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd/MM/yyyy");%>
 			  <%String sStartDate = dateFormat.format(new Date().parse("yyyy-MM-dd", event.startDate?.toString()))%>
-           <label class="label"  id="${event.startDate}">${sStartDate}</label> 
-           <label  for="eventlabel" class="label" ><g:message code="label.field.time"/>:</label>
-           <label class="label" id="${event.startTime}">${event.startTime?.toString().substring(0,5).encodeAsHTML()}</label>        
+           ${sStartDate}
+           <label class="label" ><g:message code="label.field.time"/>:</label>
+          ${event.startTime?.toString().substring(0,5).encodeAsHTML()}        
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">    
-           <label  for="eventlabel" class="label" ><g:message code="label.field.enddate"/>:</label>
+       <div class="separator3"></div>
+       <p>   
+           <label ><g:message code="label.field.enddate"/>:</label>
            <% String sEndDate;  if(event.endDate != null) {sEndDate = dateFormat.format(new Date().parse("yyyy-MM-dd", event.endDate?.toString()))}%>
-           <label class="label"  id="${event.endDate}">${sEndDate}</label> 
-           <label  for="eventlabel" class="label" ><g:message code="label.field.time"/>:</label>
-           <label class="label" id="${event.endTime}">${event.endTime?.toString()?.substring(0,5)?.encodeAsHTML()}</label>     
+           ${sEndDate}
+           <label class="label" ><g:message code="label.field.time"/>:</label>
+           ${event.endTime?.toString()?.substring(0,5)?.encodeAsHTML()} 
        </p>
-       <p class = "leftAlign" style="list-style: none outside none;">
+        <div class="separator3"></div>
+       <p>
             <label  for="eventlabel" class="label"><g:message code="label.field.place"/>:</label>
-            <label class="label"  id="${event.loc}">${event.loc?.name.encodeAsHTML()}</label>
-          	<label class="label"  id="${event.address}">${event.address?.encodeAsHTML()}</label>
+            ${event.loc?.name.encodeAsHTML()} ${event.address?.encodeAsHTML()}
        </p>
-        <p class = "leftAlign" style="list-style: none outside none;">
-            <label  for="eventlabel" class="label"><g:message code="label.field.city"/>:</label>
-           	<label class="label"  id="${event.city}">${event.city?.encodeAsHTML()}</label>
+       <div class="separator3"></div>
+        <p>
+            <label class="label"><g:message code="label.field.city"/>:</label>
+           	${event.city?.encodeAsHTML()}
+       </p>
+        <div class="separator3"></div>
+       <p>
+        <label class="label"><g:message code="default.participants.label"/></label>:  ${ParticipantsUtil.getParticipantsNumber(event.id)?.encodeAsHTML()}  
        </p>
        </div>
     </td>
+    </tr>
     </table>    
     </g:each>
-    <div class='paginateButtons'>
-    <g:if test="${results}">
-    <g:paginate  controller="display" action="searchResults" params="${[dateIni:dateIni, dateLast: dateLast]}" offset="${offset}" total="${results?.totalCount}" max="3"  />
-    </g:if>
+    <g:if test="${results?.totalCount>2}">
+    <div class='pagination'>
+    <g:paginate  controller="display" action="searchResults" params="${[dateIni:dateIni, dateLast: dateLast, followers:followers]}" offset="${offset}" total="${results?.totalCount}" max="2"  />
     </div>
+    </g:if>    
     </g:else>
 	</g:if>
     <g:else>
         <%
 		String forwardUri = request.forwardURI-request.contextPath;
 		%>
-            <g:link controller="twitterLogin" action="login" params="[forwardUri: forwardUri]">Signin with Twitter</g:link>
-     </g:else>     
+	  <div style="margin-left:30px;margin-top:20px;" >
+      <p>
+            <g:link class="label"  controller="twitterLogin" params="[forwardUri: forwardUri]" action="login"><g:message code="label.default.signin"/></g:link>
+      </p>
+      <p>
+            <g:link class="label" controller="twitterLogin" action="demologin"><g:message code="label.default.signindemo"/></g:link>
+      </p>
+      </div>
+    </g:else>     
    </g:form>
  </div>
  

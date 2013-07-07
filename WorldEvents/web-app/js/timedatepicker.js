@@ -1,3 +1,131 @@
+ $(function() {
+	$( "#datepickeren" ).datepicker({
+        dateFormat:'dd/mm/yy',        
+        changeYear:true,
+        changeMonth:true,
+      	monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa']
+    });
+    });	
+    $(function() {
+	$( "#datepickeres" ).datepicker({
+        dateFormat:'dd/mm/yy',
+        changeYear:true,
+        changeMonth:true,
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+		dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+		firstDay: 1
+    });
+	});	
+	$(function() {
+	$( "#datepickerenden" ).datepicker({
+        dateFormat:'dd/mm/yy',        
+        changeYear:true,
+        changeMonth:true,
+      	monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa']
+    });
+	});	
+	$(function() {
+	$( "#datepickerendes" ).datepicker({
+        dateFormat:'dd/mm/yy',
+        changeYear:true,
+        changeMonth:true,
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+		dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+		firstDay: 1
+    });
+	});	
+    $(function() {
+    	$( "#timepickeren" ).timepicker({
+    	timeOnlyTitle: 'Choose Time',
+    	timeText: 'Time',
+    	hourText: 'Hour',
+    	minuteText: 'Minute',
+    	secondText: 'Second',
+    	currentText : 'Now',
+    	closeText:'Hecho'
+    	});
+   	});
+    $(function() {
+    	$( "#timepickeres" ).timepicker({
+    	timeOnlyTitle: 'Elige hora',
+    	timeText: 'Hora',
+    	hourText: 'Hora',
+    	minuteText: 'Minuto',
+    	secondText: 'Segundo',
+    	currentText : 'Ahora',
+    	closeText:'Hecho'
+    	});
+   	});
+    $(function() {
+    	$( "#timepickerenden" ).timepicker({
+    	timeOnlyTitle: 'Choose Time',
+    	timeText: 'Time',
+    	hourText: 'Hour',
+    	minuteText: 'Minute',
+    	secondText: 'Second',
+    	currentText : 'Now',
+    	closeText:'Hecho'
+    	});
+   	});
+    $(function() {
+    	$( "#timepickerendes" ).timepicker({
+    	timeOnlyTitle: 'Elige hora',
+    	timeText: 'Hora',
+    	hourText: 'Hora',
+    	minuteText: 'Minuto',
+    	secondText: 'Segundo',
+    	currentText : 'Ahora',
+    	closeText:'Hecho'
+    	});
+   	});  
+$(function() {
+	$( "#datepickerinien" ).datepicker({
+        dateFormat:'dd/mm/yy',        
+        changeYear:true,
+        changeMonth:true,
+      	monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa']
+    });
+    });	
+    $(function() {
+	$( "#datepickerinies" ).datepicker({
+        dateFormat:'dd/mm/yy',
+        changeYear:true,
+        changeMonth:true,
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+		dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+		firstDay: 1
+    });
+	});	
+	$(function() {
+	$( "#datepickerlasten" ).datepicker({
+        dateFormat:'dd/mm/yy',        
+        changeYear:true,
+        changeMonth:true,
+      	monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa']
+    });
+	});	
+	$(function() {
+	$( "#datepickerlastes" ).datepicker({
+        dateFormat:'dd/mm/yy',
+        changeYear:true,
+        changeMonth:true,
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+		dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+		firstDay: 1
+    });
+	});	
 (function($) {
 
 	/*

@@ -11,9 +11,7 @@ class TwitterService {
 	static transactional = false
 	static scope = 'session'
 
-
-	 Twitter twitter
-
+    Twitter twitter
 
 	RequestToken requestToken
 
@@ -30,7 +28,7 @@ class TwitterService {
 	
 	Twitter myTwitter()
 	{
-			return twitter
+		return twitter
 	}
 
 	Object verifyCredentials(String oauth_verifier) {

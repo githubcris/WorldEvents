@@ -14,8 +14,8 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost/events?useUnicode=yes&characterEncoding=UTF-8"
+            dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
+            url = "jdbc:mysql://localhost/worldeventsdev?useUnicode=yes&characterEncoding=UTF-8"
             username = "root"
             password = "root"
         }
@@ -28,8 +28,8 @@ environments {
     }
 	production {
 		dataSource {
-			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-			url = "jdbc:mysql://localhost/events?useUnicode=yes&characterEncoding=UTF-8"
+			dbCreate = "" // one of 'create', 'create-drop', 'update', 'validate', ''
+			url = "jdbc:mysql://localhost/worldevents?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
 			password = "root"
 		}

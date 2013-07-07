@@ -34,7 +34,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        runtime 'mysql:mysql-connector-java:5.1.20'
+       // runtime 'mysql:mysql-connector-java:5.1.20'
     }
 
     plugins {
@@ -45,20 +45,17 @@ grails.project.dependency.resolution = {
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
-        runtime ":yui-minify-resources:0.1.4"
+        //runtime ":yui-minify-resources:0.1.4"
 
-        build ":tomcat:$grailsVersion"
+         build ":tomcat:$grailsVersion"
 
-        runtime ":database-migration:1.2.1"
+       // runtime ":database-migration:1.2.1"
 
         compile ':cache:1.0.1'
 		compile ":jquery-ui:1.8.24"
-
-		//compile ":jquery-date-time-picker 0.1.0"
-		//compile ":jquery-ui-timepicker 0.9.8.1"
 		compile ":google-visualization:0.6.2"
-		
-		runtime ':db-reverse-engineer:0.5'
+    	//runtime ':db-reverse-engineer:0.5'
+	//	compile ":external-config-reload:1.3.0"
     }
 	
 

@@ -6,8 +6,7 @@ import org.springframework.context.i18n.LocaleContextHolder
 
 class EditController {
 
-def twitterService
-	
+
 def index = {}
 
 def saveevent = {}
@@ -148,61 +147,6 @@ def delevent()
 	redirect controller:'display', action:'index'
 }
 
-def sendtwit(){
-	
-	Event event =  Event.get(params.id)
-	
-	event.getStart()
-	
-	if (event?.user?.twitter_id == session?.user?.twitter_id)
-	{
-			
-		    sendEventTwit(event)	
-		
-			params.mode = 'detail'
-		
-			redirect controller: 'display', action:'showdetail', 'mode' : 'detail', 'id' : event.id
 
-	}
-	else
-	{
-		render view: 'edit'
-	}
-}
-
-def sendEventTwit(Event event)
-{	
-	String lblnewEvent;
-	String lbldateEvent;
-	String lblplaceEvent;
-	
-	if (LocaleContextHolder.getLocale().language == 'es')
-	{
-		lblnewEvent = "Nuevo evento: "
-		lbldateEvent = "Fecha: "
-		lblplaceEvent = "Lugar: "
-	} 
-	else
-	{
-		lblnewEvent = "New event: "
-		lbldateEvent = "Date: "
-		lblplaceEvent = "Place: "
-	}
-		
-	String mess =lblnewEvent+ event.name + " " + lbldateEvent + event.sStartDate + " " + event.startTime.toString() + " " + lblplaceEvent+ event.loc.name + " " + event.address + " " + event.city + ", "+ event.description
-	
-	if(mess.length()>140)
-	{
-		mess = mess.substring(0,139)
-	}
-	
-	Twitter twitter = twitterService.getTwitter()
-	
-	TwitUtil.sendTwit(twitter, mess)
-	
-	String url = grailsApplication.config.grails.serverURL + "/display/showdetail/" + event.id.toString()
-	
-	TwitUtil.sendTwit(twitter, url)	
-}
 
 }
